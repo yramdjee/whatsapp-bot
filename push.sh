@@ -1,19 +1,15 @@
 #!/bin/bash
-# Script para commit e push usando SSH
+# Script automático para commit e push via SSH
 
 REPO="git@github.com:yramdjee/whatsapp-bot.git"
 BRANCH="main"
+MSG=${1:-"Atualizando projeto automaticamente"}
 
-# Configura o remote
+# Ajustar remote
 git remote remove origin 2>/dev/null
 git remote add origin $REPO
 
-# Adiciona e commita mudanças
+# Commit e push
 git add .
-git commit -m "${1:-Atualizando projeto}" || echo "Nada para commitar."
-
-# Faz push
+git commit -m "$MSG" || echo "Nada para commitar."
 git push -u origin $BRANCH
-chmod +x push.sh
-./push.sh "Mensagem do commit"
-
